@@ -46,7 +46,7 @@ class Run(APIView):
                 json.loads(request.POST['resd']),
                 request.POST['cutoff'],
             )
-            subprocess.call("zip -r "+os.getcwd() + '/uploads/' + folder+".zip "+path+"Best_molecules/*", shell=True)
+            subprocess.call("zip -j "+os.getcwd() + '/uploads/' + folder+".zip "+path+"Best_molecules/*", shell=True)
             subprocess.call("rm -rf "+path, shell=True)
             data = open(os.getcwd() + '/uploads/' + folder+".zip", "rb").read()
             subprocess.call("rm " + os.getcwd() + '/uploads/' + folder + ".zip", shell=True)
