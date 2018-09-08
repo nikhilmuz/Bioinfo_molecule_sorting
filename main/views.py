@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+from django.shortcuts import render
 from wsgiref.util import FileWrapper
+
+from django.views.generic.base import View
 
 from .serializers import *
 from rest_framework.views import APIView
@@ -56,3 +58,7 @@ class Run(APIView):
             )
         else:
             return Response(script_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class UI(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'ui.html', context=None, content_type=None, status=None, using=None)
