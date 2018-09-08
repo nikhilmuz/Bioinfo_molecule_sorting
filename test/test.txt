@@ -1,0 +1,6 @@
+Sample Request
+
+cutoff: 0
+rn: 4
+pn: FMTA_BOTH_Chains_only.pdbqt
+resd: [127,213,343,345]
