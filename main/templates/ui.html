@@ -6,6 +6,7 @@
 </head>
 <body>
 <form method="post" action="/main/run/" enctype="multipart/form-data" >
+    {% csrf_token %}
     <input type="text" name="cutoff" placeholder="Energy Cutoff"><br/>
     <input type="text" name="rn" placeholder="Number of Important Residue"><br/>
     <input type="text" name="resd" placeholder="Residues Numbers in json"><br/>
