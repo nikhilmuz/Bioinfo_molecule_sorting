@@ -14,17 +14,11 @@ def screen(envpath,pn,rn,resd,cutoffenergy):    #path,protein name , residue num
     total_moles_count =0
     selected_moles_count=0
     ####################################################### Asking for protein Name and no of import residue in it's active site
-
-    print("\n\n#############################################################################################################\n")
     Protein_Name = pn
-    print("\n***********************************************************************\n")
-
 
     with open(envpath+str(Protein_Name)) as test_file:
          lines = test_file.readlines()
     num_residue = int(rn)
-    print("\nEnter the residue number(given in pdb of protein) of protein's Active site :")
-
 
     ####################################################### Loop to ask Residue number
     res=[]
@@ -32,16 +26,9 @@ def screen(envpath,pn,rn,resd,cutoffenergy):    #path,protein name , residue num
         x=resd[i]
         res.insert(i,x)
         i+=1
-    print("\n************************************************************************\n")
-
-
 
     ####################################################### Asking for Energy cutoff
     cutoff_Energy = cutoffenergy
-    print("\n************************************************************************\n")
-    print("\n Wait..Findind ligand under given criteria...........\n")
-    print("Format..            File Name               Pose  ,  Energy ")
-
     ####################################################### function to generate json files of coordinates of important residues
 
     j=0
@@ -81,7 +68,6 @@ def screen(envpath,pn,rn,resd,cutoffenergy):    #path,protein name , residue num
                 selected_moles_count=calc_value(cutoff_Energy,envpath,num_residue,file,selected_moles_count)
 
     #######################################################Print Result of the program
-    print("\n***********************************************************************\n")
     result = open(path + 'result.txt', 'a')
     result.write("total_moles_count" + str(total_moles_count)+"\n")  ## Result file
     result.write("selected_moles_count"+str(selected_moles_count)+"\n")
@@ -99,8 +85,6 @@ def screen(envpath,pn,rn,resd,cutoffenergy):    #path,protein name , residue num
         script = file.readlines()
         for line in script:
             subprocess.call(line,shell = True)
-
-    print("\n#############################################################################################################")
 
     ####################################################### Main function to select the correct molecules
 
@@ -175,9 +159,6 @@ def calc_value(cutoff_Energy,path,num_residue,file,selected_moles_count):
                     sh = open(path+'bash.sh', 'a')
                     sh.write("cp "+path+file+" "+path+"Best_molecules"+"\n")                ##bash file
                     sh.close()
-
-                    print("\n*****************************************************\n")
-                    print(file, pose, energy)                                  ## print selected pose
                     break
         else:
             continue
