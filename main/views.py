@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
+from wsgiref.util import FileWrapper
+
 from .serializers import *
 from rest_framework.views import APIView
 from rest_framework import status
@@ -12,8 +15,19 @@ import subprocess
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from django.utils.encoding import smart_str
+from rest_framework.renderers import BaseRenderer
+
+class BinaryFileRenderer(BaseRenderer):
+    media_type = 'application/zip'
+    format = None
+    charset = None
+    render_style = 'binary'
+
+    def render(self, data, media_type=None, renderer_context=None):
+        return data
 
 class Run(APIView):
+    renderer_classes = (BinaryFileRenderer,)
     parser_classes = (MultiPartParser, FormParser)
     def post(self, request, *args, **kwargs):
         script_serializer = Script(data=request.data)
@@ -32,9 +46,12 @@ class Run(APIView):
             )
             subprocess.call("zip -r "+os.getcwd() + '/uploads/' + folder+".zip "+path+"Best_molecules/*", shell=True)
             subprocess.call("rm -rf "+path, shell=True)
+            data = open(os.getcwd() + '/uploads/' + folder+".zip", "rb").read()
+            subprocess.call("rm " + os.getcwd() + '/uploads/' + folder + ".zip", shell=True)
             return Response(
-                open(os.getcwd() + '/uploads/' + folder+".zip", "r"),
+                data,
                 status=status.HTTP_201_CREATED,
+                headers={'Content-Disposition': 'attachment', 'filename': 'result.pdf'},
                 content_type='application/zip'
             )
         else:
