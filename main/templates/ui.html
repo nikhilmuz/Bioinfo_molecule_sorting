@@ -1,18 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>VS Tool</title>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<title>VS Tool</title>
 </head>
-<body>
-<form method="post" action="/main/run/" enctype="multipart/form-data" >
-    {% csrf_token %}
-    <input type="text" name="cutoff" placeholder="Energy Cutoff"><br/>
-    <input type="text" name="rn" placeholder="Number of Important Residue"><br/>
-    <input type="text" name="resd" placeholder="Residues Numbers in json"><br/>
-    <input type="text" name="pn" placeholder="Protein Name"><br/>
-    <input type="file" name="file" placeholder="Upload *.zip Containing Molecules and protein"><br/>
-    <input type="submit" />
-</form>
+	<body>
+        <div class="row" style="padding-top:5%;">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <div class="login well" align="center">
+                    <p align=center id=message></p><br/>
+                     <form method="post" action="/main/run/" enctype="multipart/form-data" >
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-plus-sign"></i></span>
+						  <input class="form-control" name="cutoff" type="text" placeholder="Energy Cutoff" autofocus>
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-plus-sign"></i></span>
+                            <input class="form-control" name="rn" type="text" placeholder="Number of Important Residue">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-plus-sign"></i></span>
+                            <input class="form-control" name="resd" type="text" placeholder="Residues Numbers in json">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-plus-sign"></i></span>
+                            <input class="form-control" name="pn" type="text" placeholder="Protein Name">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-upload"></i></span>
+                            <input class="form-control" name="file" type="file" placeholder="Upload *.zip Containing Molecules and protein">
+                        </div>
+                        <br>
+                        <input class="btn btn-success" id="submit" type="submit" value="Submit">
+                     </form>
+				</div>
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
 </body>
 </html>
