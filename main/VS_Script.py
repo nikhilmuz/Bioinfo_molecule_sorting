@@ -149,7 +149,7 @@ def calc_value(cutoff_Energy,path,num_residue,file,selected_moles_count):
                 for p in range(1,num_residue+1):                               ##Empty Dictionary
                     pos[str(p)] =[]
 
-                    if (energy)<(cutoff_Energy):                               ## Energy_cutoff checking
+                    if (float(energy)<float(cutoff_Energy)):                               ## Energy_cutoff checking
                         selected_moles_count = selected_moles_count+1
 
                         result = open(path+'result.txt', 'a')
